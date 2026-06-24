@@ -915,7 +915,7 @@ select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_2STyrghs_j36C9QjHlzQveEDNVwc20td-eHACow2hKMtD3PnJ-kA_vBXIPVwZQL7OA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxa-z-qXP0fpNC4VxV4mN8uZDUtUY4XHFdhMgRMWqqq4NzvKff_sYpDTcXBnhc1cT1ZLw/exec';
 
 const STEP_LABELS = [
   '', 'Identité', 'Technique', 'Programmation', 'Contacts', 'Réseau'
@@ -1100,10 +1100,12 @@ async function submitForm() {
   });
 
   try {
+    const formData = new FormData();
+    Object.entries(cleanFields).forEach(([k, v]) => formData.append(k, v));
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: JSON.stringify(cleanFields)
+      body: formData
     });
 
     goTo(6);
